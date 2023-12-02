@@ -6,6 +6,7 @@ import { moon, server, sun, watch } from "../icons";
 import { IdentityContextType } from "../types/IdentityType";
 import { IdentityContext } from "../providers/IdentityProvider";
 import { ThemeContext } from "../providers/theme";
+import Image from "next/image";
 
 interface FeedNavbarProps {
   children?: React.ReactNode;
@@ -42,8 +43,8 @@ const FeedNavbar: FC<FeedNavbarProps> = ({children}) => {
         <div
           className={`flex justify-center px-2 items-center text-md font-semibold hover:shadow-md border-2 rounded-[70px] w-fit p-1 shadow-md transition duration-0 `}
         >
-          <img
-          alt="watch"
+          <Image
+            alt="watch"
             src={watch}
             className="max-w-6 max-h-6"
             style={darkMode ? { filter: "invert(1)" } : {}}

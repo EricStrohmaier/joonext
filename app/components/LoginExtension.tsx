@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { IdentityContextType } from "../types/IdentityType";
 import { IdentityContext } from "../providers/IdentityProvider";
 import { getPublicKey } from "../libraries/NIP-07";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { defaultContacts, defaultRelays, getMyContacts, getMyProfile, getMyRelays } from "../libraries/Nostr";
 
 
@@ -50,7 +50,7 @@ export const LoginExtension = () => {
           </span>
         </button>
 
-        <p className="mt-4 text-sm font-light leading-6 text-opacity-80 md:text-lg">
+        <div className="mt-4 text-sm font-light leading-6 text-opacity-80 md:text-lg">
           Don&apos;t have an extension?{" "}
           <a
             href="https://getalby.com/"
@@ -61,7 +61,7 @@ export const LoginExtension = () => {
             Get yours from Alby
             <span> &rarr;</span>
           </a>
-        </p>
+        </div>
       </div>
     </>
   );

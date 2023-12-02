@@ -1,4 +1,4 @@
-
+"use client"
 import { NDKKind } from "@nostr-dev-kit/ndk";
 import { useNDK } from "@nostr-dev-kit/ndk-react";
 import { saveEventsInDexie, saveFollowing } from "./store/saveEventInDexie";

@@ -1,21 +1,20 @@
 import { FC, useContext } from "react";
 import Button from "./CommonUI/Button";
-import { nip19 } from "nostr-tools";
 import { IdentityContextType } from "../types/IdentityType";
 import { IdentityContext } from "../providers/IdentityProvider";
 import Link from "next/link";
 import { loader } from "../utils/loader";
 import { globe, home, login, logout, stack } from "../icons";
+import Image from "next/image";
 
 interface NavListProps {}
 
 const NavList: FC<NavListProps> = () => {
+
   const navstyle = "p-1 px-2 hover:opacity-75";
 
   const {identity} = useContext<IdentityContextType>(IdentityContext)
  
-
-
   return (
     <>
       <div className="min-h-[80vh] h-full flex flex-col justify-between my-12">
@@ -41,7 +40,7 @@ const NavList: FC<NavListProps> = () => {
         </div>
         <div className="flex flex-col items-start space-y-1">
           {" "}
-          {identity === null ? (
+          {identity ? (
             <Button
               imgUrl={login}
               title="Login"
@@ -51,13 +50,13 @@ const NavList: FC<NavListProps> = () => {
           ) : (
             <>
               <div className="w-full">
-                <Link href={`/p/${identity?.pubkey}`} className="">
+                <Link href={`/p/${identity}`} className="">
                   <div
                     className={`flex justify-start items-center rounded-[10px] transition duration-100 hover:opacity-75 p-1`}
                   >
                     <div className="w-[40px] h-[40px] lg:mr-2 rounded-[10px] flex justify-center items-center">
                       {" "}
-                      <img
+                      <Image
                       alt="profile"
                         src={
                           identity?.picture

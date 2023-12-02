@@ -11,7 +11,7 @@ export const LoginPage = () => {
               <h2 className="text-xl font-bold leading-9 tracking-tight md:text-3xl">
                 Login to your NOSTR account
               </h2>
-              <p className="mt-2 text-sm font-light leading-6 text-opacity-80 md:text-lg">
+              <div className="mt-2 text-sm font-light leading-6 text-opacity-80 md:text-lg">
                 My <span className="font-bold">WHAT</span> account? Learn more
                 at{" "}
                 <a
@@ -20,7 +20,7 @@ export const LoginPage = () => {
                 >
                   nostr.com
                 </a>
-              </p>
+              </div>
             </div>
             <LoginExtension />
           </div>

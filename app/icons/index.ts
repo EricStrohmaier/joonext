@@ -22,9 +22,6 @@ import login from './login.svg';
 import logout from './logout.svg';
 import sun from './sun.svg';
 
-
-
-
 export { 
     sun,
     login,
@@ -49,5 +46,4 @@ export {
     stack,
     trash,
     watch
-
 }

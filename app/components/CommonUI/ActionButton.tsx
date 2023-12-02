@@ -1,6 +1,7 @@
 "use client"
 
 import { ThemeContext } from "@/app/providers/theme";
+import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
@@ -31,7 +32,7 @@ export default function ActionButton(props: ButtonProps) {
         >
           {" "}
           {svg && (
-            <img
+            <Image
               alt="button icon"
               src={svg}
               className="max-w-6 max-h-6"

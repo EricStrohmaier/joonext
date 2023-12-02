@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FC, HTMLProps } from "react";
 
 interface ProfileImageProps extends HTMLProps<HTMLDivElement> {
@@ -20,7 +21,7 @@ const ProfileImage: FC<ProfileImageProps> = ({
   return (
     <div className={classes}>
       <div className="flex items-center space-x-2">
-        <img
+        <Image
           src={profilePicUrl}
           alt={`${alt}'s profile`}
           className="w-12 h-12 rounded-full"

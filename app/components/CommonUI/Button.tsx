@@ -1,5 +1,8 @@
+
 "use client"
+
 import { ThemeContext } from "@/app/providers/theme";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 
@@ -28,8 +31,8 @@ const Button: React.FC<ButtonProps> = ({
 // }
 
   return (
-    <div className={` w-full`}>
-      <Link href={href ? href : "/"}   
+    <div className={`w-full`}>
+      <a href={href ? href : "/"}   
       > 
         <div
           className={`flex justify-start items-center  rounded-[10px]  ${style}`}
@@ -37,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({
           {imgUrl && (
               <div className="w-[34px] h-[34px] lg:mr-2 rounded-[10px] flex justify-center items-center">
                 {" "}
-                <img
+                <Image
                   src={imgUrl}
                   alt=""
                   className={`w-full h-full overflow-hidden rounded-[8px] z-0 ${imgStyles}`}
@@ -52,7 +55,7 @@ const Button: React.FC<ButtonProps> = ({
             </div>
           )}
         </div>
-      </Link>
+      </a>
     </div>
   );
 };

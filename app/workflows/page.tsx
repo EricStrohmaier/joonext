@@ -1,10 +1,9 @@
 'use client'
-
 import { FC } from "react";
-import LayoutPage from "../components/LayoutPage";
 import FeedNavbar from "../components/FeedNavbar";
 import WorkflowCard from "../components/WorkflowCard";
 import CreateTextNote from "../components/CreateTextNote";
+import InstaPost from "../components/InstaPost";
 
 interface WorkflowProps {}
 
@@ -43,7 +42,16 @@ const Workflow: FC<WorkflowProps> = () => {
               </div>
             </WorkflowCard>{" "}
           </div>
+          
         </div>
+        <div className="flex items-center justify-center w-full h-full lg:w-2/5 ">
+            <WorkflowCard>
+              {" "}
+              <div className="flex items-center justify-center w-full h-40">
+                <InstaPost/>
+              </div>
+            </WorkflowCard>{" "}
+          </div>
       </div>
     </>
   );

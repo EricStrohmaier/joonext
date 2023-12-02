@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Metadata } from "../types/nostr";
+import Image from "next/image";
 
 
 interface ListOfFollowersProps {
@@ -14,7 +15,7 @@ const ListOfFollowers: FC<ListOfFollowersProps> = ({userProfiles}) => {
           <p className="flex justify-center mb-2 text-xl font-semibold">Select Profiles you want in your new list!</p>
           {userProfiles.map((user, index) => (
             <div key={index} className="flex items-start gap-2 p-1 ml-7">
-              <img alt="user profile" src={user?.image} className="w-10 h-10 bg-pink-200 rounded-full"/>
+              <Image alt="user profile" src={user?.image!} className="w-10 h-10 bg-pink-200 rounded-full"/>
               <div>{user?.name}</div>
             </div>
           ))}

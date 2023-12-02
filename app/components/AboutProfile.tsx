@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { ThemeContext } from "../providers/theme";
 import Link from "next/link";
+import Image from "next/image";
 
 interface AboutProfileProps {
   picture?: string;
@@ -14,7 +15,6 @@ interface AboutProfileProps {
 
 const AboutProfile: FC<AboutProfileProps> = ({
   picture,
-
   displayName,
   nip05,
   website,
@@ -33,9 +33,9 @@ const AboutProfile: FC<AboutProfileProps> = ({
           style={{ maxWidth: "136px" } as React.CSSProperties}
         >
           <div className={`border-2 rounded-full aspect-square ${styleing}`}>
-            <img
-            alt="profile"
-              src={picture}
+            <Image
+              alt="profile"
+              src={picture!} 
               width="128"
               height="128"
               className="object-cover w-full h-full rounded-full"

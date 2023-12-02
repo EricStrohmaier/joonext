@@ -1,7 +1,10 @@
-import { useNDK } from "@nostr-dev-kit/ndk-react";
+'use client'
+
 import { FC, useContext, useEffect, useState } from "react";
 import { IdentityContextType } from "@/app/types/IdentityType";
 import { IdentityContext } from "@/app/providers/IdentityProvider";
+import { getMyRelays } from "@/app/libraries/Nostr";
+import { log } from "console";
 
 interface ShowRelaysProps {}
 
@@ -14,33 +17,29 @@ const ShowRelays: FC<ShowRelaysProps> = () => {
     "wss://nostr.wine/",
   ];
   const {identity} = useContext<IdentityContextType>(IdentityContext)
-  const { getUser } = useNDK();
+  // const { getUser } = useNDK();
 
   const [relays, setRelays] = useState([]); // Initialize with an empty array
 
   useEffect(() => {
     if (identity) {
-      const hex = identity?.npub;
+      const hex = identity?.pubkey;
 
       const fetchRelays = async () => {
         try {
-          const relayData = await getUser(hex as string)
-            .relayList()
+          const relayData = await getMyRelays(hex as string)
             .then((result) => {
+              console.log("result", result);
+              
               return result
             });
-            if (relayData instanceof Set) {
-              const relayArray = [...relayData]; // Destructure the Set into an array
-             
-              const tagsArray = relayArray
-                .map((entry) => entry.tags)
-                .filter((tags) => Array.isArray(tags))
-                .flat();
-
+            
+            if (relayData) {
+              const tagsArray = relayData[0];
+              console.log("tagsArray", tagsArray);
               
-              const wssValues = tagsArray.map((tagArray) => tagArray[1]);
-               //@ts-ignore
-              setRelays(wssValues);
+            //@ts-ignore
+              setRelays(tagsArray);
 
             }
         } catch (error) {
@@ -49,7 +48,7 @@ const ShowRelays: FC<ShowRelaysProps> = () => {
       };
       fetchRelays();
     }
-  }, [getUser, identity]);
+  }, [ identity]);
 
   if (!identity) {
     return (

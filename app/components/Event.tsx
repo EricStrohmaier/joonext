@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { Metadata } from "../types/nostr";
@@ -8,7 +10,6 @@ interface EventProps {
     pubkey: string;
     content: string;
     previewLink?: string;
-    // Add other properties from your event object
   };
 }
 

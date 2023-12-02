@@ -225,3 +225,33 @@ export const getAllFeedSinceYesterday = async (pubkeys: string[], relays = defau
   return all;
 };
 
+export const getCustomLists = async (pubkey: string[], relays = defaultRelays) => {
+  const filter = { kinds: [30000], authors: pubkey };
+  const relayList = getRelayList(relays, ['read']);
+  const sub = pool.sub(relayList, [filter]);
+  const events: EventsByKind = { all: [] }; // Initialize with an array for all events
+
+  sub.on('event', (event) => {
+    if(events.all){
+      events.all.push(event);
+      // filter events here 
+      const peopleLists = events.all.filter(
+        (entry: { tags: string[] }) =>
+          //additional filter here pls
+          (entry.tags.some((tag) => tag[0] === "name") ||
+          entry.tags.some((tag) => tag[0] === "title") ||
+          entry.tags.some((tag) => tag[0] === "description") ||
+          entry.tags.some((tag) => tag[1] === "People")
+          ));
+          console.log('peopleLists', peopleLists);
+     }
+  });
+
+  const all = await new Promise((resolve) => {
+    sub.on('eose', () => {
+      resolve(events);
+    });
+  });
+
+  return all;
+}
