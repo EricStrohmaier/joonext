@@ -19,29 +19,22 @@ const ShowRelays: FC<ShowRelaysProps> = () => {
   const {identity} = useContext<IdentityContextType>(IdentityContext)
   // const { getUser } = useNDK();
 
-  const [relays, setRelays] = useState([]); // Initialize with an empty array
+  const [relays, setRelays] = useState({}); // Initialize with an empty array
 
   useEffect(() => {
     if (identity) {
       const hex = identity?.pubkey;
-
+      console.log("hex", hex);
+      
       const fetchRelays = async () => {
         try {
           const relayData = await getMyRelays(hex as string)
             .then((result) => {
               console.log("result", result);
-              
+              setRelays(result);
               return result
             });
             
-            if (relayData) {
-              const tagsArray = relayData[0];
-              console.log("tagsArray", tagsArray);
-              
-            //@ts-ignore
-              setRelays(tagsArray);
-
-            }
         } catch (error) {
           console.error("Error fetching relays:", error);
         }
@@ -64,13 +57,19 @@ const ShowRelays: FC<ShowRelaysProps> = () => {
 
   return (
     <div className="mx-2 my-2 md:px-4 md:mx-0">
-      {relays.map((relay, index) => (
-        <div key={index}>
-          <h3 className="inline-flex">{relay}</h3>
-        </div>
-      ))}
+      {relays && typeof relays === 'object' && Object.keys(relays).length > 0 ? (
+        Object.keys(relays).map((url) => (
+          <div key={url}>
+            <h3 className="inline-flex">{url}</h3>
+          </div>
+        ))
+      ) : (
+        <p>No relays to display.</p>
+      )}
     </div>
   );
+  
+  
 };
 
 export default ShowRelays;

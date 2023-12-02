@@ -40,7 +40,7 @@ const NavList: FC<NavListProps> = () => {
         </div>
         <div className="flex flex-col items-start space-y-1">
           {" "}
-          {identity ? (
+          {!identity ? (
             <Button
               imgUrl={login}
               title="Login"
@@ -50,13 +50,13 @@ const NavList: FC<NavListProps> = () => {
           ) : (
             <>
               <div className="w-full">
-                <Link href={`/p/${identity}`} className="">
+                <Link href={`/p/${identity.pubkey}`} className="">
                   <div
                     className={`flex justify-start items-center rounded-[10px] transition duration-100 hover:opacity-75 p-1`}
                   >
                     <div className="w-[40px] h-[40px] lg:mr-2 rounded-[10px] flex justify-center items-center">
                       {" "}
-                      <Image
+                      <img
                       alt="profile"
                         src={
                           identity?.picture
@@ -66,6 +66,7 @@ const NavList: FC<NavListProps> = () => {
                               })
                             : ""
                         }
+                        
                         className={`w-full h-full overflow-hidden rounded-[8px] z-0 `}
                       />
                     </div>

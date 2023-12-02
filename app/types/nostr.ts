@@ -10,7 +10,11 @@ export interface Metadata {
     nip05verified?: boolean;
     website?: string;
   }
-  
+export interface ListEvent {
+   event: Event[]
+   
+}
+
   export type NostrProfile = {
     pubkey: string;
     name: string;

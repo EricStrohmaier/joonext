@@ -7,7 +7,7 @@ import { ContactObject } from "../types/NostrContact"
 const readWrite: RelayReadWrite = {read: true, write: true}
 
 export const defaultRelays: RelayObject = {
-  'wss://yondar.nostr1.com': readWrite,
+  // 'wss://yondar.nostr1.com': readWrite,
   'wss://relay.primal.net': readWrite,
   'wss://relay.damus.io': readWrite,
   'wss://relayable.org': readWrite,
@@ -116,6 +116,7 @@ export const getMostRecent = async (pubkey: string, kinds: number[], relays: Rel
 
 export const getMyRelays = async (pubkey: string): Promise<RelayObject> => {
   const myMetadata = await getMostRecent(pubkey,[3])
+  // console.log('myMetadata',myMetadata);
   if (!myMetadata) return defaultRelays
   try {
     return JSON.parse(myMetadata.content) as RelayObject
@@ -231,19 +232,19 @@ export const getCustomLists = async (pubkey: string[], relays = defaultRelays) =
   const sub = pool.sub(relayList, [filter]);
   const events: EventsByKind = { all: [] }; // Initialize with an array for all events
 
-  sub.on('event', (event) => {
+  sub.on('event', (event) => {    
     if(events.all){
-      events.all.push(event);
-      // filter events here 
-      const peopleLists = events.all.filter(
-        (entry: { tags: string[] }) =>
-          //additional filter here pls
-          (entry.tags.some((tag) => tag[0] === "name") ||
-          entry.tags.some((tag) => tag[0] === "title") ||
-          entry.tags.some((tag) => tag[0] === "description") ||
-          entry.tags.some((tag) => tag[1] === "People")
-          ));
-          console.log('peopleLists', peopleLists);
+      const filterEvents = event.tags.some(
+        (tag) =>
+          (tag[0] === 'name' && tag[1].trim()) ||
+          (tag[0] === 'title' && tag[1].trim()) ||
+          (tag[0] === 'description' && tag[1].trim()) ||
+          (tag[1] === 'People')
+      );
+      if (filterEvents) {
+        events.all.push(event);
+      } 
+
      }
   });
 

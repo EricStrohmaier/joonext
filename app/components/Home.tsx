@@ -13,8 +13,11 @@ import LayoutCardComponent from "./LayoutCard";
 import MyEvent from "./Event";
 import ListOfFollowers from "./ListOfFollowers";
 
-
 interface HomeProps {}
+interface ObjectAll {
+    all: Object[];
+  }
+  
 
 const HomePage: FC<HomeProps> = () => {
   const { darkMode } = useContext(ThemeContext);
@@ -24,7 +27,7 @@ const HomePage: FC<HomeProps> = () => {
   const buttonStyle = darkMode ? "bg-secondaryLight text-textLight px-2 py-1 rounded-md" : "bg-secondaryDark text-textDark px-2 py-1 rounded-md";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [following, setFollowing] = useState<string[] | undefined>(undefined);
-  const [listName, setListName] = useState([]);
+  const [lists, setLists] = useState<ObjectAll>({ all: []});
   const [userProfiles, setUserProfiles] = useState([]);
   const [selectedList, setSelectedList] = useState<Event>();
   const [selectedFeed, setSelectedFeed] = useState<{ all: [] }>({ all: [] });
@@ -35,18 +38,10 @@ const HomePage: FC<HomeProps> = () => {
   const {identity} = useContext<IdentityContextType>(IdentityContext)
   const  userData  = identity;
 
-  // const { getUser } = useNDK();
-  
-  //get all the lists from the user
-  // useCustomLists(identity?.pubkey);
-  
   const openModal = async () => {
     const allListEvents = await readListEvents();
-
-    setListName(allListEvents as []);
-    const resolvedUserProfiles = await getUserProfiles(following);
-    //@ts-ignore
-    setUserProfiles(resolvedUserProfiles);
+    // setLists(allListEvents );
+  
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -92,9 +87,8 @@ const HomePage: FC<HomeProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //@ts-ignore
-        const lsit = await getCustomLists(identity?.pubkey)
-        console.log('lsit',lsit);
+        const lists = await getCustomLists([identity?.pubkey]);        
+          setLists(lists as ObjectAll);
 
         const followingData = await readFollowing();
         setFollowing(followingData);
@@ -226,11 +220,13 @@ const HomePage: FC<HomeProps> = () => {
                             </>
                           ) : null}
                           <div className="flex flex-col gap-2">
-                            {listName?.map(
+                            
+                            {Array.isArray(lists.all)?(
+                                lists.all.map(
                               (
                                 entry: { tags?: Array<[string, string]> },
                                 index
-                              ) => {
+                              ) => {                                
                                 if (entry.tags) {
                                   // Find the title, description, and category tags in the 'tags' array
                                   const title = entry.tags.find(
@@ -279,7 +275,8 @@ const HomePage: FC<HomeProps> = () => {
 
                                 return null; // Render nothing if 'tags' property is not present
                               }
-                            )}
+                            )
+                            ):null}
                           </div>
                         </div>
                         {userProfiles && doNewList ? (
