@@ -5,16 +5,16 @@ import { IdentityContext } from "../providers/IdentityProvider";
 import Link from "next/link";
 import { loader } from "../utils/loader";
 import { globe, home, login, logout, stack } from "../icons";
-import Image from "next/image";
+import { nip19 } from "nostr-tools";
 
 interface NavListProps {}
 
 const NavList: FC<NavListProps> = () => {
 
   const navstyle = "p-1 px-2 hover:opacity-75";
-
   const {identity} = useContext<IdentityContextType>(IdentityContext)
- 
+  const npub = identity? nip19.npubEncode(identity.pubkey): null
+
   return (
     <>
       <div className="min-h-[80vh] h-full flex flex-col justify-between my-12">
@@ -50,7 +50,7 @@ const NavList: FC<NavListProps> = () => {
           ) : (
             <>
               <div className="w-full">
-                <Link href={`/p/${identity.pubkey}`} className="">
+                <Link href={`/p/${npub}`}>
                   <div
                     className={`flex justify-start items-center rounded-[10px] transition duration-100 hover:opacity-75 p-1`}
                   >

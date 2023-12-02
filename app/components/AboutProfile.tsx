@@ -33,13 +33,15 @@ const AboutProfile: FC<AboutProfileProps> = ({
           style={{ maxWidth: "136px" } as React.CSSProperties}
         >
           <div className={`border-2 rounded-full aspect-square ${styleing}`}>
-            <Image
-              alt="profile"
-              src={picture!} 
-              width="128"
-              height="128"
-              className="object-cover w-full h-full rounded-full"
-            />
+            {picture && (
+              <Image
+                alt="profile"
+                src={picture}
+                width="128"
+                height="128"
+                className="object-cover w-full h-full rounded-full"
+              />
+            )}
           </div>
         </div>
         <div className="flex items-center justify-end flex-1 mr-16 lg:mx-1">
