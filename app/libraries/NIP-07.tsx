@@ -5,7 +5,7 @@ import { NostrWindow } from '../types/NostrWindow'
 // https://stackoverflow.com/a/47130953
 declare global {
     interface Window {
-        nostr: NostrWindow;
+        nostr?: NostrWindow;
     }
 }
 
@@ -17,7 +17,7 @@ declare global {
 export const getPublicKey = async (): Promise<string|null> => {
   let pubkey: string
   try {
-    pubkey = await window.nostr.getPublicKey()
+    pubkey = await window.nostr?.getPublicKey() || ''
     console.log(pubkey)
     return pubkey
   } catch (e) {
@@ -33,8 +33,9 @@ export const getPublicKey = async (): Promise<string|null> => {
 export const signEvent = async (event: UnsignedEvent ): Promise<Event|null> => {
   let signed: Event 
   try {
-    signed = await window.nostr.signEvent(event)
-    return signed
+    // @ts-ignore
+    signed = await window.nostr?.signEvent(event) 
+    return signed 
   } catch (e) {
     console.log('signEvent() failed:',e)
     return null
