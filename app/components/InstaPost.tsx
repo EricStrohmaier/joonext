@@ -1,10 +1,16 @@
-import React, { useTransition } from "react";
+import React, { useContext, useTransition } from "react";
 import { postToInsta } from "../actions/actions";
+import { ThemeContext } from "../providers/theme";
 
 export default function InstaPost() {
   const [image, setImage] = React.useState("");
   const [input, setInput] = React.useState("");
   let [isPending, startTransition] = useTransition();
+  const { darkMode } = useContext(ThemeContext);
+
+  const textstyle = darkMode
+  ? "bg-backgroundDark text-textDark"
+  : "bg-backgroundLight text-textLight";
 
   const handlePost = () => {
     startTransition(() => {
@@ -21,12 +27,12 @@ export default function InstaPost() {
           onChange={(e) => setImage(e.target.value)}
           type="text"
           placeholder="Image Url"
-          className={`w-full h-full p-2 mb-2 rounded-md focus:outline-none bg-transparent grow `}
+          className={`${textstyle} w-full h-full p-2 mb-2 rounded-md focus:outline-none grow `}
         />
-        <textarea
+        <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className={`w-full min-h-[120px] h-full p-2 rounded-md bg-transparent  focus:outline-none`}
+          className={`${textstyle} w-full h-full p-2 rounded-md   focus:outline-none`}
           placeholder="What's your story today?"
         />
         {isPending ? (

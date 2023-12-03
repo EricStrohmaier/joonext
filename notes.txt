@@ -1,2 +1,121 @@
 //convert to hex from npub
 const hex = npub ? nip19.decode(npub).data.toString() : undefined;
+
+
+
+  result?.followingHexKeys?.forEach(async (entry) => {
+            const result = await GetCustomFeed(entry, fetchEvents);
+            // console.log(`${entry} feed result`, result);
+          });
+
+just do it!!
+
+- focus on bare min function then 
+
+- adding all the features later!
+
+
+Todo:
+
+- creating workflows!
+
+    workflow create List!
+      - create new k:30000 list with the category people? 
+            - select of current followers or search topics?
+            - give it a name and description then publish 
+            - see feed instant...
+
+    workflow login to insta and get all pictures down
+    workflow choose when publishing to insta and nostr or only one of them 
+    
+    step one  fix long and short fromat content ... publish event with right way of tags (event etc copy others)
+    step two adding schleude to posts
+    step three adding ai DVM to create workflows 
+
+    working feed => get lists[done] or 
+
+    create lists!
+    [TODO:]
+    fix light theme make it darker
+
+    make a no feed button 
+    better feed expierence   add n0str events repies etc
+
+    make nostr onetask questions => 
+
+
+
+- Working feed page explicid add someone to the list(not mute list) !! 
+    having some lists to switch? only at this client? yes...
+
+- Homepage OneTask! thats it explain plus questions   
+  homeepage without sigin is a video explaiing or screenshoots
+
+- workflows will be creating or setting preverances for ai workflows ?
+
+- white colors slight changing to better white theme more pleasent...
+
+- right rendering of data
+
+-? what else to put in dixie store
+    - followers?no
+    - events you post long and short, pictures, lists
+
+
+ToDo-Feature:
+- ai tweets poster
+
+
+
+
+
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await promise;
+
+        const userDataPromises = result?.followingHexKeys?.map(
+          async (entry) => {
+            const user = getUser(entry);
+            return user?.profile;
+          }
+        );
+        if (userDataPromises) {
+          const userData = await Promise.all(userDataPromises);
+
+          //@ts-ignore
+          setFollowing(userData);
+        }
+
+        const customLists = result?.filterdListEvents;
+
+        if (customLists) {
+          //@ts-ignore
+          setCustomListsState(customLists);
+        }
+        // console.log("customLists", customListsState);
+
+        
+        // result?.filterdListEvents?.forEach(async (entry) => {
+        //   const result = await GetCustomFeed(entry?.p, fetchEvents);
+        //   console.log(`${entry?.title} feed result`, result);
+        // });
+        
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, [customListsState, fetchEvents, getUser, promise, userData]);
+
+
+
+
+
+
+
+ // const hex = nip19.decode("npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc").data.toString();
+  // const hex = userData?.npub
+  //   ? nip19.decode(userData?.npub).data.toString()
+  //   : undefined;

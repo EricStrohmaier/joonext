@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import { FC } from "react";
 import FeedNavbar from "../components/FeedNavbar";
 import WorkflowCard from "../components/WorkflowCard";
 import CreateTextNote from "../components/CreateTextNote";
-import InstaPost from "../components/InstaPost";
+import Link from "next/link";
 
 interface WorkflowProps {}
 
@@ -13,13 +13,14 @@ const Workflow: FC<WorkflowProps> = () => {
       <FeedNavbar />
 
       <div className="w-full h-fit">
+      <div className="flex justify-center text-3xl my-3 font-semibold">Explore workflows</div>
         <div className="flex items-center justify-center w-full mb-6 min-h-[33%]">
           <WorkflowCard>
             <CreateTextNote />
           </WorkflowCard>
         </div>
 
-        <div className="w-full lg:h-2/3 h-1/3 lg:flex">
+        {/* <div className="w-full lg:h-2/3 h-1/3 lg:flex">
           <div className="flex items-center justify-center w-full h-full mb-4 lg:w-3/5">
             <WorkflowCard>
               <div className="flex items-center justify-center w-full h-40">
@@ -42,16 +43,31 @@ const Workflow: FC<WorkflowProps> = () => {
               </div>
             </WorkflowCard>{" "}
           </div>
-          
+        </div> */}
+        <div className="flex items-start justify-start w-full h-full  cursor-pointer px-3">
+          <Link href="/workflows/insta">
+          <WorkflowCard>
+            {" "}
+            <div className="flex items-center justify-center w-full h-40">
+              Export your instagram posts to nostr here <br />
+
+              Post to both plafforms at once <br />
+            </div>
+          </WorkflowCard>{" "}
+          </Link>
         </div>
-        <div className="flex items-center justify-center w-full h-full lg:w-2/5 ">
-            <WorkflowCard>
-              {" "}
-              <div className="flex items-center justify-center w-full h-40">
-                <InstaPost/>
-              </div>
-            </WorkflowCard>{" "}
-          </div>
+        <div className="flex items-start justify-start w-full h-full  cursor-pointer px-3">
+          <Link href="/workflows/lists/new">
+          <WorkflowCard>
+            {" "}
+            <div className="flex items-center justify-center w-full h-40">
+              Create new content list here <br />
+              intresting lists for an intresting feed <br />
+              sometimes we need only a coulpe of people in the feed{" "}
+            </div>
+          </WorkflowCard>{" "}
+          </Link>
+        </div>
       </div>
     </>
   );

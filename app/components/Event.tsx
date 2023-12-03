@@ -1,9 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DOMPurify from "dompurify";
 import { Metadata } from "../types/nostr";
 import { getMyProfile } from "../libraries/Nostr";
+import { ThemeContext } from "../providers/theme";
 
 interface EventProps {
   event: {
@@ -14,7 +15,11 @@ interface EventProps {
 }
 
 const MyEvent: React.FC<EventProps> = ({ event }) => {
-  const [userMetadata, setUserMetadata] = useState<Metadata | null>(null); // Adjust the type as needed
+  const [userMetadata, setUserMetadata] = useState<Metadata | null>(null);
+  const { darkMode } = useContext(ThemeContext);
+  const backgroundstyle = darkMode
+    ? "bg-secondaryDark text-textDark"
+    : "bg-secondaryLight text-textLight";
   const defaultAvatar =
     "https://imgs.search.brave.com/LekNe868ug643HRwk12QCPnv-1Tm1Ei6MKKrRJnT25E/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA1LzgzLzc2LzE0/LzM2MF9GXzU4Mzc2/MTQ1MF9sbm1OVW1J/c1ZlMWx4OTZPcU82/WUNsMXdFUXJNdnk0/VC5qcGc";
 
@@ -89,7 +94,7 @@ const MyEvent: React.FC<EventProps> = ({ event }) => {
   };
 
   return (
-    <div className="my-5 rounded-3xl bg-[#333333db] h-fit p-5 lg:p-10 overflow-x-scroll text-gray-300">
+    <div className={`${backgroundstyle} my-2 rounded-3xl  h-fit p-3 lg:p-5 overflow-x-scroll`}>
       <div className="flex items-center mb-3 space-x-2">
         <img
           className="w-10 h-10 rounded-full"
