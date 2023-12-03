@@ -7,6 +7,7 @@ import { IdentityContextType } from "../types/IdentityType";
 import { IdentityContext } from "../providers/IdentityProvider";
 import { ThemeContext } from "../providers/theme";
 import Image from "next/image";
+import { TimeContext } from "../providers/time";
 
 interface FeedNavbarProps {
   children?: React.ReactNode;
@@ -14,10 +15,9 @@ interface FeedNavbarProps {
 
 const FeedNavbar: FC<FeedNavbarProps> = ({children}) => {
   const { darkMode , toggleDarkMode} = useContext(ThemeContext);
-  // const { currentTime } = useTime() || {};
+  const { currentTime } = useContext(TimeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {identity} = useContext<IdentityContextType>(IdentityContext)
-
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -50,8 +50,7 @@ const FeedNavbar: FC<FeedNavbarProps> = ({children}) => {
             style={darkMode ? { filter: "invert(1)" } : {}}
           />
 
-          <p className={`text-sm ml-[5px]`}> {`123`}</p>
-          {/* <p className={`text-sm ml-[5px]`}> {`${currentTime}`}</p> */}
+          <p className={`text-sm ml-[5px]`}> {currentTime}</p>
         </div>
 
         <div className="flex items-center space-x-1 lg:space-x-3">

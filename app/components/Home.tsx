@@ -12,6 +12,7 @@ import FeedNavbar from "./FeedNavbar";
 import LayoutCardComponent from "./LayoutCard";
 import MyEvent from "./Event";
 import ListOfFollowers from "./ListOfFollowers";
+import { useRouter } from "next/navigation";
 
 interface HomeProps {}
 interface ObjectAll {
@@ -34,6 +35,8 @@ const HomePage: FC<HomeProps> = () => {
   const [doNewList, setNewList] = useState(false);
   console.log(userProfiles);
   console.log(selectedFeed);
+
+  const router = useRouter();
 
   const {identity} = useContext<IdentityContextType>(IdentityContext)
   const  userData  = identity;
@@ -62,7 +65,8 @@ const HomePage: FC<HomeProps> = () => {
     });
   };
   const newList = () => {
-    setNewList(!doNewList);
+    router.push("/workflows/lists/new");
+    // setNewList(!doNewList);
   };
   //@ts-ignore
   async function getUserProfiles(following) {

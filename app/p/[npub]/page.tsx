@@ -1,14 +1,12 @@
-"use client"
+"use client";
 
 import AboutProfile from "@/app/components/AboutProfile";
-import LayoutPage from "@/app/components/LayoutPage";
 import { message } from "@/app/icons";
 import { getMyProfile } from "@/app/libraries/Nostr";
 import { IdentityContext } from "@/app/providers/IdentityProvider";
 import { ThemeContext } from "@/app/providers/theme";
 import { IdentityContextType } from "@/app/types/IdentityType";
 import { Metadata } from "@/app/types/nostr";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { nip19 } from "nostr-tools";
 import { FC, useContext, useEffect, useState } from "react";
@@ -19,35 +17,32 @@ const ProfileLogic: FC<ProfileProps> = () => {
   const { npub } = useParams();
   const [metadata, setMetadata] = useState<Metadata>({});
   const { darkMode } = useContext(ThemeContext);
-  const {identity} = useContext<IdentityContextType>(IdentityContext)
+  const { identity } = useContext<IdentityContextType>(IdentityContext);
 
-    const styleing = darkMode ? "border-textDark " : "border-textLight";
+  const styleing = darkMode ? "border-textDark " : "border-textLight";
 
-    const hex = npub ? nip19.decode(npub).data.toString() : null;
+  const hex = npub ? nip19.decode(npub).data.toString() : null;
 
   useEffect(() => {
     const getUserProfile = async () => {
-      const loadedProfile = await getMyProfile(hex as string)
-      setMetadata(loadedProfile)
-    }
-    getUserProfile()
-  }, [hex])
-  
-  
+      const loadedProfile = await getMyProfile(hex as string);
+      setMetadata(loadedProfile);
+    };
+    getUserProfile();
+  }, [hex]);
+
   return (
     <>
       <div className="w-full h-fit ">
-        <div className="">
+        <div className="-m-6 -mt-12">
           <div className="w-full h-full">
-            
             {metadata.banner && (
-            <img
-              className="object-cover w-full h-32 mb-4"
-              src={metadata?.banner}
-                // width="100"
-                // height="100"
-              alt={`${metadata?.displayName}'s banner`}
-            />)}
+              <img
+                className="object-cover w-full h-32 mb-4"
+                src={metadata?.banner}
+                alt={`${metadata?.displayName}'s banner`}
+              />
+            )}
           </div>
 
           <AboutProfile
@@ -61,14 +56,12 @@ const ProfileLogic: FC<ProfileProps> = () => {
           />
           <div className={`border-[0.5px] ${styleing}`}></div>
         </div>
-    
+
         <div className="">
           {/* <Timer />
           <PersonalFeed /> */}
         </div>
-    
       </div>
-     
     </>
   );
 };

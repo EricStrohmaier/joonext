@@ -3,7 +3,7 @@ import LayoutPage from "../components/LayoutPage";
 
 interface ErrorProps {}
 
-const ErrorPage: FC<ErrorProps> = () => {
+const Custom404: FC<ErrorProps> = () => {
   return (
     <>
       <LayoutPage>
@@ -23,4 +23,4 @@ const ErrorPage: FC<ErrorProps> = () => {
   );
 };
 
-export default ErrorPage;
+export default Custom404;

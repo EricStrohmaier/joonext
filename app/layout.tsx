@@ -22,7 +22,9 @@ export default function RootLayout({
       <body className="font-main">
         <>
           <Providers>
-            <LayoutPage>{children}</LayoutPage>
+            <LayoutPage>
+              <div className="m-6 mt-12">{children}</div>
+            </LayoutPage>
             <Notification />
           </Providers>
         </>

@@ -1,4 +1,3 @@
-'use client'
 import { FC, useContext } from "react";
 import { ThemeContext } from "../providers/theme";
 
