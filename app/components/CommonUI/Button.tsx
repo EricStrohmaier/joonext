@@ -20,9 +20,9 @@ const Button: React.FC<ButtonProps> = ({
   imgStyles,
 }) => {
   const { darkMode } = useContext(ThemeContext);
-  const router = usePathname();
-
-  const isActive = router === href;
+  const router = usePathname();  
+  const path = router.split("/")[1];  
+  const isActive = `/${path}` === href;
 
   const buttonStyle = `${style} ${
     isActive

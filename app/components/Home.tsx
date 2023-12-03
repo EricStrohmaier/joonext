@@ -13,6 +13,7 @@ import LayoutCardComponent from "./LayoutCard";
 import MyEvent from "./Event";
 import ListOfFollowers from "./ListOfFollowers";
 import { useRouter } from "next/navigation";
+import { getAnyUserProfile } from "../libraries/customFunctions";
 
 interface HomeProps {}
 interface ObjectAll {
@@ -55,12 +56,11 @@ const HomePage: FC<HomeProps> = () => {
   //@ts-ignore
   const handleListClick = async (list) => {
     setSelectedList(list);
-    console.log("list", list);
-
+    // console.log("list", list);
     const pTags = list.tags.filter((tag: string[]) => tag[0] === "p");
     const pTagValues = pTags.map((tag: string[]) => tag[1]);
     getAllFeedSinceYesterday(pTagValues as string[]).then((feedEvents) => {
-      console.log("feedEvents", feedEvents);
+    //   console.log("feedEvents", feedEvents);
       setSelectedFeed(feedEvents as { all: [] });
     });
   };
@@ -68,25 +68,7 @@ const HomePage: FC<HomeProps> = () => {
     router.push("/workflows/lists/new");
     // setNewList(!doNewList);
   };
-  //@ts-ignore
-  async function getUserProfiles(following) {
-    try {
-      //@ts-ignore
-      const userDataPromises = following?.map((entry) => {
-        const user = getMyProfile(entry);
-        return user;
-      });
-
-      // Wait for all promises to resolve
-      const userData = await Promise.all(userDataPromises);
-      if (userData) {
-        return userData;
-      }
-    } catch (error) {
-      console.error("Error fetching user profiles:", error);
-      throw error;
-    }
-  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,9 +80,8 @@ const HomePage: FC<HomeProps> = () => {
         setFollowing(followingData);
         // Assuming getUserProfiles returns a Promise
         if (followingData) {
-          const resolvedUserProfiles = await getUserProfiles(followingData);
-          //@ts-ignore
-          setUserProfiles(resolvedUserProfiles);
+          const resolvedUserProfiles = await getAnyUserProfile(followingData);
+          setUserProfiles(resolvedUserProfiles as [])
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -110,7 +91,6 @@ const HomePage: FC<HomeProps> = () => {
     fetchData();
   }, []);
 
-  // if (userData === null) {
   return (
     <>
       <FeedNavbar>
