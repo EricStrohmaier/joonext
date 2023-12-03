@@ -1,6 +1,6 @@
 import LoginExtension from "../components/LoginExtension";
 
-export const LoginPage = () => {
+const LoginPage = () => {
 
   return (
     <>
