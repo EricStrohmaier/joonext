@@ -21,7 +21,7 @@ const ProfileLogic: FC<ProfileProps> = () => {
 
   const styleing = darkMode ? "border-textDark " : "border-textLight";
 
-  const hex = npub ? nip19.decode(npub).data.toString() : null;
+  const hex = npub ? nip19.decode(`npub1${npub}`).data.toString() : null;
 
   useEffect(() => {
     const getUserProfile = async () => {
