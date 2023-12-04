@@ -5,7 +5,7 @@ import { NostrWindow } from '../types/NostrWindow'
 // https://stackoverflow.com/a/47130953
 declare global {
     interface Window {
-        nostr?: NostrWindow | undefined;
+        nostr?: NostrWindow;
     }
 }
 
