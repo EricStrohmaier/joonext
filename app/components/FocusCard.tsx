@@ -1,12 +1,12 @@
 import { FC, useContext } from "react";
 import { ThemeContext } from "../providers/theme";
 
-interface WorkflowCardProps {
+interface FocusCardProps {
   children: React.ReactNode;
   style?: string;
 }
 
-const WorkflowCard: FC<WorkflowCardProps> = ({ children, style }) => {
+const FocusCard: FC<FocusCardProps> = ({ children, style }) => {
   const { darkMode } = useContext(ThemeContext);
 
   const cardStyling = darkMode ? "bg-secondaryDark " : "bg-secondaryLight";
@@ -26,5 +26,5 @@ const WorkflowCard: FC<WorkflowCardProps> = ({ children, style }) => {
   );
 };
 
-export default WorkflowCard;
+export default FocusCard;
 
