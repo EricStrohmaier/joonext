@@ -1,11 +1,17 @@
 "use client";
 import InstaPost from "@/app/components/InstaPost";
 import FocusCard from "@/app/components/FocusCard";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { LuChevronDown } from "react-icons/lu";
 
 export default function Insta() {
+  const [selected, setSelected] = useState("");
+
+  const handleSelect = (value: string) => {
+    setSelected(value);
+  };
+
   return (
     <div className="flex flex-col items-end text-sm w-full font-semibold">
       <div className="flex items-center justify-center w-full h-full mt-6">
@@ -23,7 +29,8 @@ export default function Insta() {
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-                  What do you want to do? <LuChevronDown className="-mr-1 ml-2 h-5 w-5" />
+                  What do you want to do?{" "}
+                  <LuChevronDown className="-mr-1 ml-2 h-5 w-5" />
                 </Menu.Button>
               </div>
               <Transition
@@ -40,6 +47,9 @@ export default function Insta() {
                     <Menu.Item>
                       {({ active }) => (
                         <button
+                          onClick={() =>
+                            handleSelect("Export Instagram Content")
+                          }
                           className={`${
                             active
                               ? "bg-gray-300 text-gray-900"
@@ -55,6 +65,9 @@ export default function Insta() {
                     <Menu.Item>
                       {({ active }) => (
                         <button
+                          onClick={() =>
+                            handleSelect("Post to Instagram & Nostr")
+                          }
                           className={`${
                             active
                               ? "bg-gray-300 text-gray-900"
@@ -70,6 +83,9 @@ export default function Insta() {
                     <Menu.Item>
                       {({ active }) => (
                         <button
+                          onClick={() =>
+                            handleSelect("Find Insta friends on Nostr")
+                          }
                           className={`${
                             active
                               ? "bg-gray-300 text-gray-900"
@@ -85,8 +101,13 @@ export default function Insta() {
               </Transition>
             </Menu>
             <div className="mx-5 flex justify-center items-center">
-              same line?
+              {selected && <>{selected}</>}
             </div>
+          </div>
+          <div className="mt-10">
+            {selected === "Export Instagram Content" && <>Export Instagram Content</>}
+            {selected === "Post to Instagram & Nostr" && <>Post to Instagram & Nostr</>}
+            {selected === "Find Insta friends on Nostr" && <>Find Insta friends on Nostr</>}
           </div>
         </FocusCard>
       </div>
