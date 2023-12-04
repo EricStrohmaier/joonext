@@ -1,6 +1,6 @@
 // import ProfileCard from "../../../components/CommonUI/ProfileCard";
 
-import WorkflowCard from "./WorkflowCard";
+import FocusCard from "./FocusCard";
 
 function PersonalFeed() {
 
@@ -11,7 +11,7 @@ function PersonalFeed() {
   return (
     <div className="lg:w-full w-[95%] ">
       <div className="items-center  flex flex-col h-full lg:w-full w-[96%]">
-        <WorkflowCard>
+        <FocusCard>
           <div className="flex items-center justify-center h-96 "></div>
           {/* <div className="flex flex-col items-center">
             {sortedData?.map((item, index) => {
@@ -28,7 +28,7 @@ function PersonalFeed() {
               );
             })}
           </div> */}
-        </WorkflowCard>
+        </FocusCard>
       </div>{" "}
     </div>
   );

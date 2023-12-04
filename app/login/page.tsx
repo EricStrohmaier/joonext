@@ -4,8 +4,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="flex justify-center min-h-full">
-        <div className="flex flex-col items-center flex-1 px-4 my-12 md:justify-center sm:px-6 lg:px-20 xl:px-24">
+      <div className="h-full">
+        <div className="flex flex-col items-center flex-1 px-4 my-12 justify-center sm:px-6 lg:px-20 xl:px-24">
           <div className="w-full max-w-md mx-auto">
             <div>
               <h2 className="text-xl font-bold leading-9 tracking-tight md:text-3xl">
