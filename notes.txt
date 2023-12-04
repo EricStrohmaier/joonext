@@ -28,6 +28,8 @@ Todo:
     workflow login to insta and get all pictures down
     workflow choose when publishing to insta and nostr or only one of them 
     
+    !find your ekigai workflow?
+
     step one  fix long and short fromat content ... publish event with right way of tags (event etc copy others)
     step two adding schleude to posts
     step three adding ai DVM to create workflows 

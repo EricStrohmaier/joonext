@@ -161,7 +161,7 @@ const HomePage: FC<HomeProps> = () => {
                   <span className="mt-3 text-lg">
                     or default working mode{" "}
                     <button
-                      className={`px-2 py-1 text-lg    rounded-md ${buttonStyle}}`}
+                      className={`px-2 py-1 text-lg rounded-md ${buttonStyle}}`}
                     >
                       hide everything
                     </button>
