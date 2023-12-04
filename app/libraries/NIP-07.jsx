@@ -3,19 +3,19 @@ import { NostrWindow } from '../types/NostrWindow'
 
 // This declaration allows us to access window.nostr without TS errors.
 // https://stackoverflow.com/a/47130953
-declare global {
-    interface Window {
-        nostr?: NostrWindow;
-    }
-}
+// declare global {
+//     interface Window {
+//         nostr?: NostrWindow;
+//     }
+// }
 
 /**
  * Try/catch wrapper for window.nostr.getPublicKey
  * nostr.getPublicKey can error if no key has been set up yet.
  * @returns pubkey:string|null
  */
-export const getPublicKey = async (): Promise<string|null> => {
-  let pubkey: string
+export const getPublicKey = async ()=> {
+  let pubkey
   try {
     pubkey = await window.nostr?.getPublicKey() || ''
     console.log(pubkey)
@@ -30,10 +30,9 @@ export const getPublicKey = async (): Promise<string|null> => {
  * Try/catch wrapper for window.nostr.signEvent
  * nostr.signEvent can error if the user rejects the signature request or if no key has been set up yet.
  */
-export const signEvent = async (event: UnsignedEvent ): Promise<Event|null> => {
-  let signed: Event 
+export const signEvent = async () => {
+  let signed 
   try {
-    // @ts-ignore
     signed = await window.nostr?.signEvent(event) 
     return signed 
   } catch (e) {
