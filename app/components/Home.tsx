@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC, useContext, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
@@ -6,46 +6,55 @@ import { Event } from "nostr-tools";
 import { ThemeContext } from "../providers/theme";
 import { IdentityContextType } from "../types/IdentityType";
 import { IdentityContext } from "../providers/IdentityProvider";
-import { readFollowing, readListEvents } from "../libraries/store/saveEventInDexie";
-import { getAllFeedSinceYesterday, getCustomLists, getMyProfile } from "../libraries/Nostr";
+import {
+  readFollowing,
+  readListEvents,
+} from "../libraries/store/saveEventInDexie";
+import {
+  getAllFeedSinceYesterday,
+  getCustomLists,
+  getMyProfile,
+} from "../libraries/Nostr";
 import FeedNavbar from "./FeedNavbar";
 import LayoutCardComponent from "./LayoutCard";
 import MyEvent from "./Event";
 import ListOfFollowers from "./ListOfFollowers";
 import { useRouter } from "next/navigation";
 import { getAnyUserProfile } from "../libraries/customFunctions";
+import Link from "next/link";
+import { upArrow } from "../icons";
+import Image from "next/image";
 
 interface HomeProps {}
 interface ObjectAll {
-    all: Object[];
-  }
-  
+  all: Object[];
+}
 
 const HomePage: FC<HomeProps> = () => {
   const { darkMode } = useContext(ThemeContext);
   const backgroundstyle = darkMode
     ? "bg-primaryDark text-textDark"
     : "bg-primaryLight text-textLight";
-  const buttonStyle = darkMode ? "bg-secondaryLight text-textLight px-2 py-1 rounded-md" : "bg-secondaryDark text-textDark px-2 py-1 rounded-md";
+  const buttonStyle = darkMode
+    ? "bg-secondaryLight text-textLight px-2 py-1 "
+    : "bg-secondaryDark text-textDark px-2 py-1 ";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [following, setFollowing] = useState<string[] | undefined>(undefined);
-  const [lists, setLists] = useState<ObjectAll>({ all: []});
+  const [lists, setLists] = useState<ObjectAll>({ all: [] });
   const [userProfiles, setUserProfiles] = useState([]);
   const [selectedList, setSelectedList] = useState<Event>();
   const [selectedFeed, setSelectedFeed] = useState<{ all: [] }>({ all: [] });
   const [doNewList, setNewList] = useState(false);
-  console.log(userProfiles);
-  console.log(selectedFeed);
 
   const router = useRouter();
 
-  const {identity} = useContext<IdentityContextType>(IdentityContext)
-  const  userData  = identity;
+  const { identity } = useContext<IdentityContextType>(IdentityContext);
+  const userData = identity;
 
   const openModal = async () => {
     const allListEvents = await readListEvents();
     // setLists(allListEvents );
-  
+
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -60,7 +69,7 @@ const HomePage: FC<HomeProps> = () => {
     const pTags = list.tags.filter((tag: string[]) => tag[0] === "p");
     const pTagValues = pTags.map((tag: string[]) => tag[1]);
     getAllFeedSinceYesterday(pTagValues as string[]).then((feedEvents) => {
-    //   console.log("feedEvents", feedEvents);
+      //   console.log("feedEvents", feedEvents);
       setSelectedFeed(feedEvents as { all: [] });
     });
   };
@@ -68,20 +77,19 @@ const HomePage: FC<HomeProps> = () => {
     router.push("/workflows/lists/new");
     // setNewList(!doNewList);
   };
-  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const lists = await getCustomLists([identity?.pubkey]);        
-          setLists(lists as ObjectAll);
+        const lists = await getCustomLists([identity?.pubkey]);
+        setLists(lists as ObjectAll);
 
         const followingData = await readFollowing();
         setFollowing(followingData);
         // Assuming getUserProfiles returns a Promise
         if (followingData) {
           const resolvedUserProfiles = await getAnyUserProfile(followingData);
-          setUserProfiles(resolvedUserProfiles as [])
+          setUserProfiles(resolvedUserProfiles as []);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -99,7 +107,7 @@ const HomePage: FC<HomeProps> = () => {
             {/* make local store selected list state and use for components */}
             {selectedList ? (
               <div className="cursor-pointer" onClick={openModal}>
-                Current Selected Feed Name:{" "}
+                Current Selected Feed:{" "}
                 {
                   selectedList?.tags?.find(
                     (tag: string[]) => tag[0] === "title"
@@ -108,7 +116,7 @@ const HomePage: FC<HomeProps> = () => {
               </div>
             ) : (
               <div className="cursor-pointer" onClick={openModal}>
-                No Personal Selected Feed Please Select One Here!
+                No Selected Feed Please Select Here!
               </div>
             )}
           </div>
@@ -133,8 +141,31 @@ const HomePage: FC<HomeProps> = () => {
                   ))}
                 </div>
               ) : (
-                <div className="flex justify-center mt-5 text-3xl font-semibold">
-                  You are welcome, no public feed
+                <div className="flex flex-col justify-center text-center mt-5 text-3xl font-semibold">
+                  <p>You are welcome, no public feed </p>
+                  <br />
+                  <span className="flex items-end justify-end">
+                    <Image
+                      className="mr-36 "
+                      width={60}
+                      height={60}
+                      style={darkMode ? { filter: "invert(1)" } : {}}
+                      src={upArrow}
+                      alt="uparrow"
+                    />
+                  </span>
+                  <span className="flex justify-center relative bottom-7">
+                    choose one of your lists to set your feed{" "}
+                  </span>
+
+                  <span className="mt-3 text-lg">
+                    or default working mode{" "}
+                    <button
+                      className={`px-2 py-1 text-lg    rounded-md ${buttonStyle}}`}
+                    >
+                      hide everything
+                    </button>
+                  </span>
                 </div>
               )}
             </div>
@@ -197,70 +228,80 @@ const HomePage: FC<HomeProps> = () => {
                                   placeholder="An optional description..."
                                 />
                                 <div className="flex justify-end my-2">
-                                  <button className={`mx-2 ${buttonStyle}`} onClick={newList}>Cancel Edit</button>
-                                  <button className={`mx-2 ${buttonStyle}`}>Save</button>
+                                  <button
+                                    className={`mx-2 ${buttonStyle}`}
+                                    onClick={newList}
+                                  >
+                                    Cancel Edit
+                                  </button>
+                                  <button className={`mx-2 ${buttonStyle}`}>
+                                    Save
+                                  </button>
                                 </div>
                               </div>
                             </>
                           ) : null}
                           <div className="flex flex-col gap-2">
-                            
-                            {Array.isArray(lists.all)?(
-                                lists.all.map(
-                              (
-                                entry: { tags?: Array<[string, string]> },
-                                index
-                              ) => {                                
-                                if (entry.tags) {
-                                  // Find the title, description, and category tags in the 'tags' array
-                                  const title = entry.tags.find(
-                                    (tag) => tag[0] === "title"
-                                  );
-                                  const name = entry.tags.find(
-                                    (tag) => tag[0] === "name"
-                                  );
-                                  const description = entry.tags.find(
-                                    (tag) => tag[0] === "description"
-                                  );
-                                  const category = entry.tags.find(
-                                    (tag) => tag[0] === "l"
-                                  );
+                            {Array.isArray(lists.all)
+                              ? lists.all.map(
+                                  (
+                                    entry: { tags?: Array<[string, string]> },
+                                    index
+                                  ) => {
+                                    if (entry.tags) {
+                                      // Find the title, description, and category tags in the 'tags' array
+                                      const title = entry.tags.find(
+                                        (tag) => tag[0] === "title"
+                                      );
+                                      const name = entry.tags.find(
+                                        (tag) => tag[0] === "name"
+                                      );
+                                      const description = entry.tags.find(
+                                        (tag) => tag[0] === "description"
+                                      );
+                                      const category = entry.tags.find(
+                                        (tag) => tag[0] === "l"
+                                      );
 
-                                  return (
-                                    <>
-                                      <div
-                                        key={index}
-                                        className={`flex items-center gap-2 ${
-                                          //@ts-ignore
-                                          selectedList === entry
-                                            ? "border-4 border-blue-600 w-fit rounded-2xl"
-                                            : ""
-                                        }`}
-                                        onClick={() => handleListClick(entry)}
-                                      >
-                                        <div className="p-2 bg-gray-400 rounded-xl">
-                                          {title ? (
-                                            <p>List Title: {title[1]}</p>
-                                          ) : null}
-                                          {name ? (
-                                            <p>List Title: {name[1]}</p>
-                                          ) : null}
-                                          {description ? (
-                                            <p>Description: {description[1]}</p>
-                                          ) : null}
-                                          {category ? (
-                                            <p>Category: {category[1]}</p>
-                                          ) : null}
-                                        </div>
-                                      </div>
-                                    </>
-                                  );
-                                }
+                                      return (
+                                        <>
+                                          <div
+                                            key={index}
+                                            className={`flex items-center gap-2 ${
+                                              //@ts-ignore
+                                              selectedList === entry
+                                                ? "border-4 border-blue-600 w-fit rounded-2xl"
+                                                : ""
+                                            }`}
+                                            onClick={() =>
+                                              handleListClick(entry)
+                                            }
+                                          >
+                                            <div className="p-2 bg-gray-400 rounded-xl">
+                                              {title ? (
+                                                <p>List Title: {title[1]}</p>
+                                              ) : null}
+                                              {name ? (
+                                                <p>List Title: {name[1]}</p>
+                                              ) : null}
+                                              {description ? (
+                                                <p>
+                                                  Description: {description[1]}
+                                                </p>
+                                              ) : null}
+                                              {category ? (
+                                                <p>Category: {category[1]}</p>
+                                              ) : null}
+                                            </div>
+                                          </div>
+                                        </>
+                                      );
+                                    }
 
-                                return null; // Render nothing if 'tags' property is not present
-                              }
-                            )
-                            ):null}
+                                    return null; // Render nothing if 'tags' property is not present
+                                  }
+                                )
+                              : null}
                           </div>
                         </div>
                         {userProfiles && doNewList ? (
@@ -282,4 +323,3 @@ const HomePage: FC<HomeProps> = () => {
 };
 
 export default HomePage;
-

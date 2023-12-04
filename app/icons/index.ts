@@ -21,8 +21,10 @@ import search from './search.svg';
 import login from './login.svg';
 import logout from './logout.svg';
 import sun from './sun.svg';
+import upArrow from './upArrow.svg';
 
 export { 
+    upArrow,
     sun,
     login,
     logout,
