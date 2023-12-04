@@ -13,7 +13,7 @@ const NavList: FC<NavListProps> = () => {
 
   const navstyle = "p-1 px-2 hover:opacity-75";
   const {identity} = useContext<IdentityContextType>(IdentityContext)
-  const npub = identity? nip19.npubEncode(identity.pubkey): null
+  const npub = identity? nip19.npubEncode(identity.pubkey) : ''
 
   return (
     <>
