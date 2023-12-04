@@ -10,63 +10,45 @@ interface WorkflowProps {}
 const Workflow: FC<WorkflowProps> = () => {
   return (
     <>
-      <FeedNavbar />
+      <FeedNavbar>
+      <div className="items-center text-sm  font-semibold">
+          Did you know that you can export your instagram posts to nostr?{" "}
+          <Link href="/workflows/insta" className="underline">
+            find out how!
+          </Link>
+        </div>
+      </FeedNavbar>
 
       <div className="w-full h-fit">
-      <div className="flex justify-center text-3xl my-3 font-semibold">Explore workflows</div>
         <div className="flex items-center justify-center w-full mb-6 min-h-[33%]">
           <FocusCard>
             <CreateTextNote />
           </FocusCard>
         </div>
-
-        {/* <div className="w-full lg:h-2/3 h-1/3 lg:flex">
-          <div className="flex items-center justify-center w-full h-full mb-4 lg:w-3/5">
+        <div className="flex justify-center text-3xl my-3 font-semibold">
+          Explore workflows
+        </div>
+        <div className="w-full h-full cursor-pointer px-3 flex flex-row">
+          <Link href="/workflows/insta" className="flex justify-center items-center mr-5 w-[35%] scale-100 hover:scale-105 transition-transform duration-100">
             <FocusCard>
-              <div className="flex items-center justify-center w-full h-40">
-                comming soon <br />
-                Post&apos;s:
-                <br />
-                Schleude your posts <br />
-                publish drafts etc.
+              <div className="flex justify-center items-center h-40 text-xl font-semibold">
+              Instagram integration
               </div>
             </FocusCard>{" "}
-          </div>
-          <div className="flex items-center justify-center w-full h-full lg:w-2/5 ">
+          </Link>
+          <Link href="/workflows/lists/new" className="flex  justify-center items-center mr-5 w-[65%] text-center scale-100 hover:scale-105 transition-transform duration-100">
             <FocusCard>
               {" "}
-              <div className="flex items-center justify-center w-full h-40">
-                comming soon <br />
-                LISTS:
-                <br />
-                View and edit your lists{" "}
+              <div className="flex items-center justify-center w-full h-40 text-xl font-semibold">
+                Create new content list here <br />
+                intresting lists for an intresting feed <br />
+                sometimes we need only a coulpe of people in the feed{" "}
               </div>
             </FocusCard>{" "}
-          </div>
-        </div> */}
-        <div className="flex items-start justify-start w-full h-full  cursor-pointer px-3">
-          <Link href="/workflows/insta">
-          <FocusCard>
-            {" "}
-            <div className="flex items-center justify-center w-full h-40">
-              Export your instagram posts to nostr here <br />
-
-              Post to both plafforms at once <br />
-            </div>
-          </FocusCard>{" "}
           </Link>
         </div>
-        <div className="flex items-start justify-start w-full h-full  cursor-pointer px-3">
-          <Link href="/workflows/lists/new">
-          <FocusCard>
-            {" "}
-            <div className="flex items-center justify-center w-full h-40">
-              Create new content list here <br />
-              intresting lists for an intresting feed <br />
-              sometimes we need only a coulpe of people in the feed{" "}
-            </div>
-          </FocusCard>{" "}
-          </Link>
+        <div className="flex justify-start w-full h-full  cursor-pointer px-3">
+          
         </div>
       </div>
     </>
