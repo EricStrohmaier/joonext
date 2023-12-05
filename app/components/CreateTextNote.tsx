@@ -93,17 +93,17 @@ const CreateTextNote: FC<CreateTextNoteProps> = () => {
           <input
             type="text"
             placeholder="Blog Title"
-            className={`w-full h-full p-2 mb-2 rounded-2xl focus:outline-none ${textstyle}`}
+            className={`w-full h-full p-2 mb-2 rounded-xl focus:outline-none ${textstyle}`}
           />
           <input
             type="text"
             placeholder="Image Url"
-            className={`w-full h-full p-2 mb-2 rounded-2xl focus:outline-none ${textstyle}`}
+            className={`w-full h-full p-2 mb-2 rounded-xl focus:outline-none ${textstyle}`}
           />
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className={`w-full min-h-[120px] h-full p-2 rounded-2xl focus:outline-none ${textstyle}`}
+            className={`w-full min-h-[120px] h-full p-2 rounded-xl focus:outline-none ${textstyle}`}
             placeholder="What's your story today?"
           />
         </div>

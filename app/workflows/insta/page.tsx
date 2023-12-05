@@ -4,6 +4,7 @@ import FocusCard from "@/app/components/FocusCard";
 import React, { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { LuChevronDown } from "react-icons/lu";
+import UserInstaForm from "@/app/components/UserInstaForm";
 
 export default function Insta() {
   const [selected, setSelected] = useState("");
@@ -14,16 +15,20 @@ export default function Insta() {
 
   return (
     <div className="flex flex-col items-end text-sm w-full font-semibold">
-      <div className="flex items-center justify-center w-full h-full mt-6">
-        <div className="flex flex-col items-center justify-center w-[90%] leading-9 h-fit text-xl font-semibold text-center">
-          <FocusCard>
-            Save time on social media posting! <br /> Our tool lets you create
-            cross-platform posts without distractions. <br /> No need to
-            navigate each platform individually—focus on what matters. 🚀
-          </FocusCard>
+      {!selected ? (
+        <div className="flex items-center justify-center w-full h-full mt-5 mb-6">
+          <div className="flex flex-col items-center justify-center w-[90%] leading-9 h-fit text-xl font-semibold text-center">
+            <FocusCard>
+              Save time on social media posting! <br /> Our tool lets you create
+              cross-platform posts without distractions. <br /> No need to
+              navigate each platform individually—focus on what matters. 🚀
+            </FocusCard>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col mt-12 mx-auto items-center justify-center w-[90%] h-full">
+      ) : (
+        <></>
+      )}
+      <div className="flex flex-col mt-5 mx-auto items-center justify-center w-[90%] h-full">
         <FocusCard>
           <div className="flex flex-row">
             <Menu as="div" className="relative inline-block text-left">
@@ -101,13 +106,22 @@ export default function Insta() {
               </Transition>
             </Menu>
             <div className="mx-5 flex justify-center items-center">
-              {selected && <>{selected}</>}
+              {selected && (
+                <>
+                  {" "}
+                  <div className="">
+                    You will need your Instagram username and password for this.
+                  </div>
+                </>
+              )}
             </div>
           </div>
-          <div className="mt-10">
-            {selected === "Export Instagram Content" && <>Export Instagram Content</>}
-            {selected === "Post to Instagram & Nostr" && <>Post to Instagram & Nostr</>}
-            {selected === "Find Insta friends on Nostr" && <>Find Insta friends on Nostr</>}
+          <div className="mt-4">
+            {selected && (
+              <div className="flex flex-col items-center justify-center">
+                <UserInstaForm />
+              </div>
+            )}
           </div>
         </FocusCard>
       </div>
