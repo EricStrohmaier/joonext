@@ -47,8 +47,15 @@ const Workflow: FC<WorkflowProps> = () => {
             </FocusCard>{" "}
           </Link>
         </div>
-        <div className="flex justify-start w-full h-full  cursor-pointer px-3">
-          
+        <div className="flex mt-5 justify-start w-full h-full cursor-pointer px-3">
+        <Link href="/" className="flex  justify-center items-center w-[55%] text-center scale-100 hover:scale-105 transition-transform duration-100">
+            <FocusCard>
+              {" "}
+              <div className="flex items-center justify-center w-full h-40 text-xl font-semibold">
+                Explore your nostr feed <br />
+              </div>
+            </FocusCard>{" "}
+          </Link>
         </div>
       </div>
     </>

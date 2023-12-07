@@ -4,6 +4,7 @@ import { ThemeContext } from "../providers/theme";
 import { getInstaLogin } from "../actions/actions";
 import Notification from "./Notification";
 import { NotifyContext } from "../providers/notify-provider";
+import InstaPost from "./InstaPost";
 
 export default function UserInstaForm() {
   const [username, setUsername] = useState("");
@@ -47,7 +48,7 @@ export default function UserInstaForm() {
         className={`flex flex-col p-5  rounded-xl w-[70%] space-y-2 ${background}`}
       >
         {successLogin ? (
-          <div>Login success here are you pic</div>
+          <><InstaPost/></>
         ) : (
           <>
             <label>Instagram Account Details</label>

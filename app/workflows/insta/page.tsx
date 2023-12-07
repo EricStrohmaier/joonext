@@ -108,7 +108,6 @@ export default function Insta() {
             <div className="mx-5 flex justify-center items-center">
               {selected && (
                 <>
-                  {" "}
                   <div className="">
                     You will need your Instagram username and password for this.
                   </div>

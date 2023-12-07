@@ -26,6 +26,7 @@ Todo:
             - see feed instant...
 
     workflow login to insta and get all pictures down
+    intressting question... about if saving user login to reuse or each function makes its own user etc?
     workflow choose when publishing to insta and nostr or only one of them 
     
     !find your ekigai workflow?
