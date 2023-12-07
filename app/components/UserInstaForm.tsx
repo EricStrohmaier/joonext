@@ -20,7 +20,8 @@ export default function UserInstaForm() {
   const button = darkMode
     ? "bg-secondaryLight text-textLight border-gray-300"
     : "bg-secondaryDark text-textDark";
-
+  const background = darkMode ? "bg-black/20" : "bg-backgroundLight";
+  
   const handleLogin = () => {
     console.log("entered handleLogin");
     // startTransition( async () => {
@@ -39,8 +40,8 @@ export default function UserInstaForm() {
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="flex flex-col p-3 border-[1px] rounded-xl w-[70%] space-y-2">
+    <div className={`w-full flex justify-center mt-10 `}>
+      <div className={`flex flex-col p-5  rounded-xl w-[70%] space-y-2 ${background}`}>
         <label>Instagram Account Details</label>
         <input
           placeholder="Username"

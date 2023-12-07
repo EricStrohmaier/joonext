@@ -118,7 +118,7 @@ export default function Insta() {
           </div>
           <div className="mt-4">
             {selected && (
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center  min-h-[70vh]">
                 <UserInstaForm />
               </div>
             )}
