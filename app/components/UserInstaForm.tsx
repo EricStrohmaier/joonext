@@ -10,7 +10,7 @@ export default function UserInstaForm() {
   const [password, setPassword] = useState("");
   let [isPending, startTransition] = useTransition();
   const { setNotifyMessage } = useContext(NotifyContext);
-
+// just save login to state and then pass it later
   const { darkMode } = useContext(ThemeContext);
 
   const textstyle = darkMode
@@ -23,19 +23,19 @@ export default function UserInstaForm() {
 
   const handleLogin = () => {
     console.log("entered handleLogin");
-    startTransition( async () => {
-        const result = await getInstaLogin(username, password);
+    // startTransition( async () => {
+    //     const result = await getInstaLogin(username, password);
     
-        if (result.success) {
-          // Handle successful login
-          console.log("Login successful", result.data.username);
-            setNotifyMessage("Login successful");
-        } else {
-          // Handle login error
-          console.error("Login error", result.data);
-            setNotifyMessage("Login error");
-        }
-      });
+    //     if (result.success) {
+    //       // Handle successful login
+    //       console.log("Login successful", result.data.username);
+    //         setNotifyMessage("Login successful");
+    //     } else {
+    //       // Handle login error
+    //       console.error("Login error", result.data);
+    //         setNotifyMessage("Login error");
+    //     }
+    //   });
   };
 
   return (

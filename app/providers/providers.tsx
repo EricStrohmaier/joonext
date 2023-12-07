@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import RelayProvider from "./relay-provider";
 import NotifyProvider from "./notify-provider";

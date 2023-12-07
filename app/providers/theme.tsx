@@ -13,12 +13,8 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('darkMode');
-      return storedTheme ? JSON.parse(storedTheme) : false;
-    }
-    return false; // Default value if not running on the client side
-  });
+    return typeof window !== 'undefined' && JSON.parse(localStorage.getItem('darkMode') || "false");
+    });
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode: any) => {
