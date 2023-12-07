@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useState, useTransition } from "react";
 import { ThemeContext } from "../providers/theme";
-import { getInstaLogin } from "../actions/actions";
+import { getInstaLogin, postToInsta } from "../actions/actions";
 import Notification from "./Notification";
 import { NotifyContext } from "../providers/notify-provider";
 import InstaPost from "./InstaPost";
@@ -9,8 +9,10 @@ import InstaPost from "./InstaPost";
 export default function UserInstaForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
+  const [input, setInput] = useState("");
   let [isPending, startTransition] = useTransition();
-  const [successLogin, setSuccessLogin] = useState(true);
+  const [successLogin, setSuccessLogin] = useState(false);
   const { setNotifyMessage } = useContext(NotifyContext);
   // just save login to state and then pass it later
   const { darkMode } = useContext(ThemeContext);
@@ -22,10 +24,22 @@ export default function UserInstaForm() {
   const button = darkMode
     ? "bg-secondaryLight text-textLight border-gray-300"
     : "bg-secondaryDark text-textDark";
+
   const background = darkMode ? "bg-black/20" : "bg-backgroundLight";
 
+  const handlePost = () => {
+    startTransition(async () => {
+     const result = postToInsta(image, input, username, password);
+    console.log("this result",result);
+    
+    });
+  };
+
   const handleLogin = () => {
-    console.log("entered handleLogin");
+    startTransition(async () => {
+      
+    setSuccessLogin(true);
+    });
     // startTransition( async () => {
     //     const result = await getInstaLogin(username, password);
 
@@ -48,7 +62,33 @@ export default function UserInstaForm() {
         className={`flex flex-col p-5  rounded-xl w-[70%] space-y-2 ${background}`}
       >
         {successLogin ? (
-          <><InstaPost/></>
+          <>
+            <label>Instagram Post Details</label>
+            <input
+              placeholder="https://image....."
+              className={`w-full h-full p-2 mb-2 rounded-xl focus:outline-none ${textstyle}`}
+              type="text"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+            <input
+              placeholder="Caption of the day"
+              className={`w-full h-full p-2 mb-2 rounded-xl focus:outline-none ${textstyle}`}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            {isPending ? (
+              <div>Uploading the image...</div>
+            ) : (
+              <button
+                onClick={handlePost}
+                className={`border rounded-[70px] p-1 px-2 mr-2 shadow-sm text-sm ml-auto ${button}`}
+              >
+                Next
+              </button>
+            )}{" "}
+          </>
         ) : (
           <>
             <label>Instagram Account Details</label>

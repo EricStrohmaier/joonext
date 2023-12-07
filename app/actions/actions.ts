@@ -2,19 +2,19 @@
 
 import axios from "axios";
 import { IgApiClient } from "instagram-private-api";
+import { get } from "request-promise";
 
-export async function postToInsta(imageUrl: string, caption: string) {
+export async function postToInsta(imageUrl: string, caption: string, username: string, password: string) {
   const ig = new IgApiClient();
-  ig.state.generateDevice(process.env.IG_USERNAME!);
-  await ig.account.login(process.env.IG_USERNAME!, process.env.IG_PASSWORD!);
+  ig.state.generateDevice(username);
+  await ig.account.login(username, password);
 
-  const { data: imageBuffer } = await axios.get(imageUrl, {
-    responseType: "arraybuffer",
-  });
+  const imageBuffer = await get({url: imageUrl, encoding: null})
 
-  await ig.publish.photo({
-    file: Buffer.from(imageBuffer, "binary"),
-    caption,
+ 
+ await ig.publish.photo({
+    file: imageBuffer,
+    caption: caption,
   });
 }
 

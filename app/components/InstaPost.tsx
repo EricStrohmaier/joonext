@@ -18,7 +18,7 @@ export default function InstaPost() {
 
   const handlePost = () => {
     startTransition(() => {
-      postToInsta(image, input);
+      // postToInsta(image, input);
     });
   };
   return (
