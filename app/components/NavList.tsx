@@ -13,7 +13,7 @@ const NavList: FC<NavListProps> = () => {
 
   const navstyle = "p-1 px-2 hover:opacity-75";
   const {identity} = useContext<IdentityContextType>(IdentityContext)
-  const npub = identity? nip19.npubEncode(identity.pubkey) : ''
+  // const npub = identity? nip19.npubEncode(identity.pubkey) : ''
 
   return (
     <>
@@ -50,7 +50,7 @@ const NavList: FC<NavListProps> = () => {
           ) : (
             <>
               <div className="w-full">
-                <Link href={`/p/${npub}`}>
+                <Link href={`/p/${identity.pubkey}`}>
                   <div
                     className={`flex justify-start items-center rounded-[10px] transition duration-100 hover:opacity-75 p-1`}
                   >

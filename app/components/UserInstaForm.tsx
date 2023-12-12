@@ -5,6 +5,8 @@ import { getInstaLogin, postToInsta } from "../actions/actions";
 import Notification from "./Notification";
 import { NotifyContext } from "../providers/notify-provider";
 import InstaPost from "./InstaPost";
+import { IgApiClient } from "instagram-private-api";
+import { get } from "request-promise";
 
 export default function UserInstaForm() {
   const [username, setUsername] = useState("");
@@ -28,11 +30,11 @@ export default function UserInstaForm() {
   const background = darkMode ? "bg-black/20" : "bg-backgroundLight";
 
   const handlePost = () => {
-    startTransition(async () => {
-     const result = postToInsta(image, input, username, password);
-    console.log("this result",result);
     
+    startTransition(() => {
+      postToInsta(image, input);
     });
+    
   };
 
   const handleLogin = () => {
