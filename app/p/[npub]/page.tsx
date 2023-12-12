@@ -7,21 +7,22 @@ import { IdentityContext } from "@/app/providers/IdentityProvider";
 import { ThemeContext } from "@/app/providers/theme";
 import { IdentityContextType } from "@/app/types/IdentityType";
 import { Metadata } from "@/app/types/nostr";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { nip19 } from "nostr-tools";
 import { FC, useContext, useEffect, useState } from "react";
 
 interface ProfileProps {}
 
 const ProfileLogic: FC<ProfileProps> = () => {
-  const { npub } = useParams();
+  const router = usePathname();
+  const hex = router.slice(3);  
+  // const [npub, setNpub] = useState<string | null>(null);
+  
   const [metadata, setMetadata] = useState<Metadata>({});
   const { darkMode } = useContext(ThemeContext);
-  const { identity } = useContext<IdentityContextType>(IdentityContext);
+  // const { identity } = useContext<IdentityContextType>(IdentityContext);
 
   const styleing = darkMode ? "border-textDark " : "border-textLight";
-
-  const hex = npub ? nip19.decode(`${npub}`).data.toString() : null;
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -36,12 +37,14 @@ const ProfileLogic: FC<ProfileProps> = () => {
       <div className="w-full h-fit ">
         <div className="-m-6 -mt-12">
           <div className="w-full h-full">
-            {metadata.banner && (
+            {metadata.banner ? (
               <img
                 className="object-cover w-full h-32 mb-4"
                 src={metadata?.banner}
                 alt={`${metadata?.displayName}'s banner`}
               />
+            ) : (
+              <div className="w-full h-32 mb-4 bg-gray-300"></div>
             )}
           </div>
 

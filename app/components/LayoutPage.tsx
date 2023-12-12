@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { FC, useContext } from "react";
 import NavList from "./NavList";
 import { ThemeContext } from "../providers/theme";

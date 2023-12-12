@@ -34,7 +34,7 @@ const AboutProfile: FC<AboutProfileProps> = ({
         >
           <div className={`border-2 rounded-full aspect-square ${styleing}`}>
             {picture && (
-              <Image
+              <img
                 alt="profile"
                 src={picture}
                 width="128"

@@ -5,6 +5,7 @@ import DOMPurify from "dompurify";
 import { Metadata } from "../types/nostr";
 import { getMyProfile } from "../libraries/Nostr";
 import { ThemeContext } from "../providers/theme";
+import Link from "next/link";
 
 interface EventProps {
   event: {
@@ -95,6 +96,7 @@ const MyEvent: React.FC<EventProps> = ({ event }) => {
 
   return (
     <div className={`${backgroundstyle} my-2 rounded-3xl  h-fit p-3 lg:p-5 overflow-x-scroll`}>
+      <Link href={`/p/${event.pubkey}`}>
       <div className="flex items-center mb-3 space-x-2">
         <img
           className="w-10 h-10 rounded-full"
@@ -103,6 +105,7 @@ const MyEvent: React.FC<EventProps> = ({ event }) => {
         />
         <div>{userMetadata ? userMetadata.name : "Mr. Unknown"}</div>
       </div>
+      </Link>
       <div>{renderContent()}</div>
       <div className="flex justify-between mt-3">
         {event.previewLink && (
