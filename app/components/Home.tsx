@@ -13,7 +13,6 @@ import {
 import {
   getAllFeedSinceYesterday,
   getCustomLists,
-  getMyProfile,
 } from "../libraries/Nostr";
 import FeedNavbar from "./FeedNavbar";
 import LayoutCardComponent from "./LayoutCard";
@@ -21,7 +20,6 @@ import MyEvent from "./Event";
 import ListOfFollowers from "./ListOfFollowers";
 import { useRouter } from "next/navigation";
 import { getAnyUserProfile } from "../libraries/customFunctions";
-import Link from "next/link";
 import { upArrow } from "../icons";
 import Image from "next/image";
 

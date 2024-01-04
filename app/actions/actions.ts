@@ -30,7 +30,7 @@ export async function getInstaLogin(username: string, password: string) {
   const userData = {
     username: ig.account.currentUser(),
   };
-  console.log(userData);
+  console.log(JSON.stringify(userData));
 
-  return { success: true, data: userData };
+  return { success: true, data: JSON.stringify(userData) };
 }

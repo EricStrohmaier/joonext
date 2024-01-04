@@ -38,24 +38,20 @@ export default function UserInstaForm() {
   };
 
   const handleLogin = () => {
-    startTransition(async () => {
-      
-    setSuccessLogin(true);
-    });
-    // startTransition( async () => {
-    //     const result = await getInstaLogin(username, password);
+    startTransition( async () => {
+        const result = await getInstaLogin(username, password);
 
-    //     if (result.success) {
-    //       // Handle successful login
-    //       setSuccessLogin(true);
-    //       console.log("Login successful", result.data.username);
-    //         setNotifyMessage("Login successful");
-    //     } else {
-    //       // Handle login error
-    //       console.error("Login error", result.data);
-    //         setNotifyMessage("Login error");
-    //     }
-    //   });
+        if (result.success) {
+          // Handle successful login
+          setSuccessLogin(true);
+          console.log("Login successful", result.data);
+            setNotifyMessage(`${result.data} logged in successfully`);
+        } else {
+          // Handle login error
+          console.error("Login error", result.data);
+            setNotifyMessage("Login error");
+        }
+      });
   };
 
   return (
