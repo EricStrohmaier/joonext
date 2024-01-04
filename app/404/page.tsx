@@ -6,7 +6,7 @@ interface ErrorProps {}
 const Custom404: FC<ErrorProps> = () => {
   return (
     <>
-      <LayoutPage>
+      <>
         <div className="flex items-center justify-center w-full">
           <div className="flex flex-col items-center justify-center">
             <div className="text-6xl font-extrabold">404 Error</div>
@@ -18,7 +18,7 @@ const Custom404: FC<ErrorProps> = () => {
             </div>
           </div>
         </div>
-      </LayoutPage>
+      </>
     </>
   );
 };

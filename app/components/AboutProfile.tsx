@@ -47,7 +47,7 @@ const AboutProfile: FC<AboutProfileProps> = ({
         <div className="flex items-center justify-end flex-1 mr-16 lg:mx-1">
           <div className="flex">
             <div className="mr-3">
-              <a href={`lightning:${lud16}`} className="">
+              <a href={`lightning:${lud16}`}>
                 ⚡
               </a>
             </div>

@@ -32,7 +32,7 @@ export default function UserInstaForm() {
   const handlePost = () => {
     
     startTransition(() => {
-      postToInsta(image, input);
+      postToInsta(image, input,username,password);
     });
     
   };
